@@ -1,0 +1,100 @@
+.game-board {
+    margin:20px auto;
+    padding:20px;
+    grid-gap:10px;
+    justify-content: center;
+    border-style:solid;
+    background-color:black;
+    display:grid;
+}
+.introduction {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    border-style:solid;
+    border-color: black;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    font-size: 1em;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Indie Flower', cursive;
+    font-family: 'Lobster', cursive;
+    padding: 10px;
+    word-break: break-word;
+    text-align: center;
+}
+
+img {
+    width: 150;
+    height:150px;
+    margin: 10px;
+    border-radius:15%;
+    border-style:solid;
+    border-color:white;
+}
+
+.remaining-time {
+    display: none;
+}
+.size {
+    display:none;
+}
+
+.restart-btn {
+    display: none;
+}
+
+.quit-btn {
+    display: none;
+}
+.game-container {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.row {
+    width:auto;
+    height:100px;  
+    border-style:solid;
+    border-color:red;
+}
+
+.cols {
+    width:auto;
+    height:100px;
+    border-style:solid;
+    border-color:blue;
+}
+
+
+
+.size {
+    padding:5px;
+    margin: 5px;
+}
+
+.start-btn {
+    margin-top: 20%;
+    margin-bottom: 0;
+    padding: 5px;
+}
+
+.lost-statement {
+    display: none;
+}
+.score {
+    display: none;
+}
+.control-btns {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}

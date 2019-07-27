@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:500|Indie+Flower|Lobster&display=swap" rel="stylesheet">
+    <link href="newStyles.css" rel="stylesheet" />
+    <title>Card Match</title>
+</head>
+<html>
+  <body class="center">
+    <div class="game-container">
+      <div>
+        <h1>Card Match</h1>
+        <div class="size-buttons">
+          <button class="size" id ="levelOne">Level One</button>
+          <button class="size" id ="levelTwo">Two</button>
+          <button class="size" id ="levelThree">Level Three</button>
+        </div>
+        <div class= "control-btns">
+          <button class ="start-btn">START</button>
+          <button class ="restart-btn">RESTART</button>
+        </div>  
+        <div class="remaining-time">Time: 0</div>
+        <div class="introduction">
+          <p class="intro">
+            This is a card matching game created by <br> Amanda Park
+          </p>
+         </div>
+        <!-- initally the game board is empty -->
+        <div class= "score">Score: 0</div>
+        <div class="game-board"></div>
+        <div class="lost-statement">You Lost...</div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="script_new.js"></script>
+  </body>
+</html>
