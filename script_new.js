@@ -1,15 +1,19 @@
 "use strict"
-
+// TODO: Implement state <3
+//TODO: reset score
 // set grid number based on the user choice.
-
+let state = {gameOnGoing};
 const SIZE_SMALL = 4;        
 const SIZE_MEDIUM = 6;    
 const SIZE_BIG = 8;    
+
 let rowSize = -1;// set default value as small
 let colSize = -1;
 let gameTimeLimit = -1;
 let timer = null;
 let gameOnGoing = false;
+let currentScore = 0;
+let totalLength = -1;
 let cards = [
     '1.jpg', 
     '2.jpg', 
@@ -31,11 +35,8 @@ let cards = [
 
 //the card that has been chosen according to the input choice
 let chosenCards = [];
-//list of matched cards
-let matched = new Set();
-console.log(matched.has(5));
-// let matched = [];
-let clickedToCheck=[];
+let matched = [];
+let clickedToCheck = [];
 $(".game-board").hide();// doesn't show at first
 $(".start-btn").on("click", handleStartClick);//start press then level
 $(".size").on("click", sizeCallBack);
@@ -48,7 +49,6 @@ function handleStartClick() {
         //the user clicked restart button
         gameOver();
         gameOnGoing = true;
-        console.log("onGOing");
     }
     $(".lost-statement").hide();
     $(".introduction").hide();
@@ -81,6 +81,7 @@ function sizeAndTimeSet(event) {
         colSize =SIZE_BIG;
         gameTimeLimit = 1000;
     }
+    totalLength = rowSize * 2;
 }
 
 //the size button hasbeen clicked and append the items
@@ -117,50 +118,76 @@ function gameBoadPrep(event) {
         //give listener to all cards
     } 
     $(".card").on("click", function(event) {
-        console.log(canBeFlip(event));
-        console.log( $(this).children('.card-face').id); // ehy undefined?
-        console.log($(this).children('.card-back')); 
-        $(this).children('.card-back').toggle("hide");   
-        $(this).children('.card-face').toggle("hide");  
-        if ($( this ).css( "transform" ) == 'none' ){
-            $(this).css("transform","360deg");
-        } else {
-            $(this).css("transform","" );
+        console.log("cliked?");
+        //condition: entering length is always 0, 1, 2
+        // is the item the same item?
+        //they are not the same item by this time
+        // then check canBeFliped 
+        // if canBeFliped -> toggleItem(this)
+        // and clear the clickedToCheck array
+        // toggleItem(this);
+        //only check if the item is not alredy checked
+        if (!matched.includes(this)) {
+            console.log("hasn't seen before");
+            clickedToCheck.push(this);
+            toggleItem(this);
+            console.log(clickedToCheck.length);
+            if (clickedToCheck.length == 2) {
+                let isMatched = isMatchId();
+                console.log(isMatched);
+                if (isMatched) {//card are matching pair
+                    //then keep display
+                    console.log("matched");
+                    matched.push(clickedToCheck[0]);
+                    matched.push(clickedToCheck[1]);
+                    clickedToCheck = [];
+                    currentScore++;
+                    console.log(matched.length);
+                    console.log(chosenCards.length);
+                    if (matched.length === totalLength) {
+                        victory();
+                        console.log("you won");
+                        $(".wining-statement").css("display", "inline");
+                    }
+                    //update score
+                    $(".score").html("Score:   " + currentScore);
+                } else {
+                    //card is wrong pair then flip the
+                    //turn back in the array
+                    //cards are not mathcing pairs
+                    console.log("else branch");
+                    setTimeout( () => { 
+                        console.log("time");
+                        toggleItem(clickedToCheck[0]);
+                        toggleItem(clickedToCheck[1]);
+                        clickedToCheck = [];
+                    }, 400);
+                }        
+            }
         }
+         console.log("clickedArray" + clickedToCheck);
+        // console.log($(this).children('.card-face')[0].id);
     }); 
 }
 
-//1. previously matched
-//2.only upto two cards is allowe to be open 
-//change parameter to the string event id?
+function toggleItem(element) {
+    console.log("toggled");
+    $(element).children('.card-back').toggle("hide");   
+    $(element).children('.card-face').toggle("hide");  
+}
+
 function canBeFlip(element) {
-    //cnage to includes name
-    return (matched.includes($(element).children('.card-face')) && clickedToCheck.length < 2);
+    return (matched.includes($(element).children('.card-face')));
 }
 
-function isMatch(event) {
-    if (clickedToCheck.includes(event)) {
-        matched.push(event);
-        //flip remove toggle class fuctionality
-    }
+function isMatchId() {// index[0] == index[1]
+    console.log($(clickedToCheck[0]).children('.card-face')[0].id);
+    console.log($(clickedToCheck[1]).children('.card-face')[0].id);
+    return $(clickedToCheck[0]).children('.card-face')[0].id === $(clickedToCheck[1]).children('.card-face')[0].id;  
 }
 
-function isMisMathc(event) {
-    //then rotate back and
-}
 //must be length 2 to be called
 //maybe have a eay to make as an event?
-function cardOpen() {
-    if (clickedToCheck.length == 2) {
-        if (clickedToCheck[0] == clickedToCheck[1]) {
-            matched.push(clickedToCheck[0]);
-            console.log("macthed");
-        } else {
-            //clear ou the currently attempted to match items
-            clickedToCheck = [];
-        }
-    }
-}
 
 //noe display the finalized board
 function playGameHandler(event) {
@@ -183,30 +210,10 @@ function startCountDown() {
     }, 1000);
 }
 
-// function chandleCardClike() {
-//     // chosenCard
-    
-// }
+function victory() {
+    console.log("you won");
+}
 
-
-// function flipCard(event) {
-//     //condition1: either user has not chose any card yet
-//     //condition2: the newly clikedcard is not currently
-//     //open card
-//     let cardName = event.event.id;
-//     if (chosenCards.length < 2 && )
-//     return !gameStarted = 
-// }
-//cards that has been alredy matched
-// function isMatchingPair() {
-//     if () {
-
-//     }
-// }
-// function canFlipCard() {
-//     //condition1: card must not be currently open
-//     return !gameStarted &&
-// }
 function restart() {
     hideInfo();
     gameOnGoing = true;
@@ -225,6 +232,7 @@ function hideInfo() {
 }
 
 function gameOver(timer) {
+    // TODO: Fix the game ending state. Handle winning condition.
     gameOnGoing = false;
     clearInterval(timer);
     hideInfo(timer);
@@ -232,6 +240,10 @@ function gameOver(timer) {
     $(".score").hide();
     console.log("over");
 }
+
+// function winningComment() {
+
+// }
 
 
 

@@ -75,6 +75,9 @@ img {
     border-color:white;
 }
 
+.wining-statement {
+    display: none;
+}
 .remaining-time {
     display: none;
 }
