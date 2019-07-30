@@ -15,8 +15,47 @@
     border-color: black;
     align-items: center;
     justify-content: center;
+    border-width: 5px;
 }
 
+/* button source:https://www.designskilz.com/cool-css-buttons/ */
+button{
+    background:black;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1.6em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  }
+  button:hover{
+    background:#fff;
+    color:black;
+  }
+  button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background:black;
+    transition:400ms ease all;
+  }
+  button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  button:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+  
 p {
     font-size: 1em;
     font-family: 'Dosis', sans-serif;
@@ -71,8 +110,6 @@ img {
     border-color:blue;
 }
 
-
-
 .size {
     padding:5px;
     margin: 5px;
@@ -84,9 +121,26 @@ img {
     padding: 5px;
 }
 
+
 .lost-statement {
+    border-style: solid;
+    border-width: 3px;
+    display: none;
+    text-align: center;
+    margin-top: 40%;
+    margin-bottom: 20%;
+    padding: 20%;
+    vertical-align: middle;
+    font-size: 4rem;;
+    
+}
+.hidden {
     display: none;
 }
+
+/* .card-face {
+    display : 
+} */
 .score {
     display: none;
 }
@@ -97,4 +151,30 @@ img {
 
 h1 {
     text-align: center;
+}
+
+.remaining-time {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    border: 2px solid black;
+    margin-inline-start: 20px;
+    border-radius: 40px;
+    font-size: 1.5em;
+}
+
+.score {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    border: 2px solid black;
+    margin-inline-start: 20px;
+    border-radius: 40px;
+    margin-top: 30px;
 }
