@@ -2,15 +2,16 @@
 // TODO: Implement state <3
 //TODO: reset score and do stateA
 // set grid number based on the user choice.
-let state = {gameOnGoing: false, winning:false};
+let state = {gameOnGoing: false, winning:false, timer: null};
 const SIZE_SMALL = 4;        
 const SIZE_MEDIUM = 6;    
-const SIZE_BIG = 8;    
-
+const SIZE_BIG = 8; 
+let isBeingPlayed = false;  
+let winOrLose = false;
+let timerId = null;
 let rowSize = -1;// set default value as small
 let colSize = -1;
 let gameTimeLimit = -1;
-let timer = null;
 let currentScore = 0;
 let totalLength = -1;
 let cards = [
@@ -44,7 +45,7 @@ $(".home-button").on("click",homeBunHandle);
 
 function homeBunHandle() {
     $(".introduction").show();
-    gameOver(timer);
+    gameOver(timerId);
     $(".statement").hide();
     $(".restart-btn").hide();
     $(".home-button").hide();
@@ -54,50 +55,40 @@ function homeBunHandle() {
 }
 //start the game
 function handleStartClick() {
-    if (!state["gameOnGoing"]) {
-        gameOver();
+    if (isBeingPlayed) {
+        gameOver(timerId);
         currentScore = 0;
-        state["gameOnGoing"] = true;
+        isBeingPlayed = true;
+        winOrLose  = false;
     }
     $(".home-button").show();
     $(".lost-statement").hide();
     $(".introduction").hide();
     cards = _.shuffle(cards);
     $(".start-btn").hide();
-    displaySizeOption();//disaply game size option and create gameboard
-}
-
-
-function displaySizeOption() {
     $(".size").show();
 }
-
-function removeSizeOption() {
-     $(".size").hide();
-}
-
 
 function sizeAndTimeSet(event) {
     if (event.target.id === "levelOne") {
         console.log(event.target.id);
         rowSize = SIZE_SMALL;
         colSize = SIZE_SMALL;
-        gameTimeLimit = 10;
+        gameTimeLimit = 60;
     } else if (event.target.id === "levelTwo") {
         rowSize = SIZE_MEDIUM;
         colSize = SIZE_MEDIUM;
-        gameTimeLimit = 60;
+        gameTimeLimit = 120;
     } else if (event.target.id === "levelThree") {
         rowSize =SIZE_BIG;
         colSize =SIZE_BIG;
-        gameTimeLimit = 1000;
+        gameTimeLimit = 140;
     }
     totalLength = rowSize * 2;
 }
 
 //the size button hasbeen clicked and append the items
 function sizeCallBack(event) {
-    // $(".remaining-time").html("Timer:   " + gameTimeLimit);
     $(".home-button").show();
     gameBoadPrep(event);
     playGameHandler(event);
@@ -147,8 +138,7 @@ function gameBoadPrep(event) {
             if (clickedToCheck.length == 2) {
                 let isMatched = isMatchId();
                 console.log(isMatched);
-                if (isMatched) {//card are matching pair
-                    //then keep display
+                if (isMatched) {
                     console.log("matched");
                     matched.push(clickedToCheck[0]);
                     matched.push(clickedToCheck[1]);
@@ -157,9 +147,8 @@ function gameBoadPrep(event) {
                     console.log(matched.length);
                     console.log(chosenCards.length);
                     if (matched.length === totalLength) {
-                        state["winning"] = true;
-                        console.log(state["winning"]);
-                        gameOver(timer);
+                        winOrLose = true;
+                        gameOver(timerId);
                         console.log("you won");
                         $(".wining-statement").css("display", "inline");
                     }
@@ -169,7 +158,6 @@ function gameBoadPrep(event) {
                     //card is wrong pair then flip the
                     //turn back in the array
                     //cards are not mathcing pairs
-                    console.log("else branch");
                     setTimeout( () => { 
                         console.log("time");
                         toggleItem(clickedToCheck[0]);
@@ -179,7 +167,6 @@ function gameBoadPrep(event) {
                 }        
             }
         }
-         console.log("clickedArray" + clickedToCheck);
         // console.log($(this).children('.card-face')[0].id);
     }); 
 }
@@ -215,27 +202,28 @@ function startCountDown() {
     $(".remaining-time").show();
     $(".remaining-time").text(gameTimeLimit);
     //every one second 
-    timer = setInterval(() => {
+    timerId = setInterval(() => {
         gameTimeLimit--;
         console.log(gameTimeLimit);
         $(".remaining-time").html("Timer:   " + gameTimeLimit);
         if(gameTimeLimit === 0) {
-            state["gameOnGoing"] = false;
-            gameOver(timer);
+            isBeingPlayed = false;
+            gameOver(timerId);
+          
         }
     }, 1000);
 }
 
 function restart() {
     hideInfo();
-    state["gameOnGoing"] = true;
+    isBeingPlayed = true;
     $(".statement").hide();
     handleStartClick();
     $(".restart-btn").hide();
 }
 
 function hideInfo() {
-    clearInterval(timer);
+    clearInterval(timerId);
     $(".game-board").empty();
     $(".personal-info").hide();
     $(".game-board").hide();
@@ -248,14 +236,14 @@ function gameOver(timer) {
     // TODO: Fix the game ending state. Handle winning condition.
     // gameOnGoing = false;
     clearInterval(timer);
+    $(".score").html("Score:   0");
     hideInfo(timer);
-    if (state["winning"]) {
+    if (winOrLose) {
         $(".wining-statement").show();
     } else {
         $(".lost-statement").show();
     }
     $(".score").hide();
-    console.log("over");
 }
 
 

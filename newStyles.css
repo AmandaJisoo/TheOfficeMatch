@@ -7,6 +7,11 @@
     background-color:black;
     display:grid;
 }
+h1 {
+    font-size: 2.5rem; 
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: 'Hind Siliguri', sans-serif;
+}
 .introduction {
     display: flex;
     margin-top: 20px;
@@ -23,6 +28,7 @@
 }
 /* button source:https://www.designskilz.com/cool-css-buttons/ */
 button{
+    /* margin-inline-start: 0px; */
     background:black;
     color:#fff;
     /* margin-bottom: 10px; */
@@ -85,9 +91,6 @@ img {
     border-color:white;
 }
 
-.wining-statement {
-    display: none;
-}
 .remaining-time {
     display: none;
 }
@@ -124,8 +127,10 @@ img {
 }
 
 .size {
+    text-align: center;
     padding:5px;
     margin: 5px;
+    padding: 20px;
 }
 
 .start-btn {
@@ -144,17 +149,20 @@ img {
     padding: 50px;
     vertical-align: middle;
     font-size: 4rem;
+    display:hidden;
     
 }
 .hidden {
     display: none;
 }
 
-/* .card-face {
-    display : 
-} */
+.wining-statement {
+    display: none;
+}
+
 .score {
     display: none;
+    font-size: 25px;
 }
 .control-btns {
     display: flex;
