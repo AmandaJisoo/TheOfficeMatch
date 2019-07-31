@@ -1,8 +1,8 @@
 "use strict"
 // TODO: Implement state <3
-//TODO: reset score
+//TODO: reset score and do stateA
 // set grid number based on the user choice.
-let state = {gameOnGoing};
+let state = {gameOnGoing: false, winning:false};
 const SIZE_SMALL = 4;        
 const SIZE_MEDIUM = 6;    
 const SIZE_BIG = 8;    
@@ -11,7 +11,6 @@ let rowSize = -1;// set default value as small
 let colSize = -1;
 let gameTimeLimit = -1;
 let timer = null;
-let gameOnGoing = false;
 let currentScore = 0;
 let totalLength = -1;
 let cards = [
@@ -41,21 +40,33 @@ $(".game-board").hide();// doesn't show at first
 $(".start-btn").on("click", handleStartClick);//start press then level
 $(".size").on("click", sizeCallBack);
 $(".restart-btn").on("click", restart);
+$(".home-button").on("click",homeBunHandle);
 
+function homeBunHandle() {
+    $(".introduction").show();
+    gameOver(timer);
+    $(".statement").hide();
+    $(".restart-btn").hide();
+    $(".home-button").hide();
+    $(".start-btn").show();
+    $(".size").hide();    
 
+}
 //start the game
 function handleStartClick() {
-    if (!gameOnGoing) {
-        //the user clicked restart button
+    if (!state["gameOnGoing"]) {
         gameOver();
-        gameOnGoing = true;
+        currentScore = 0;
+        state["gameOnGoing"] = true;
     }
+    $(".home-button").show();
     $(".lost-statement").hide();
     $(".introduction").hide();
     cards = _.shuffle(cards);
     $(".start-btn").hide();
     displaySizeOption();//disaply game size option and create gameboard
 }
+
 
 function displaySizeOption() {
     $(".size").show();
@@ -71,7 +82,7 @@ function sizeAndTimeSet(event) {
         console.log(event.target.id);
         rowSize = SIZE_SMALL;
         colSize = SIZE_SMALL;
-        gameTimeLimit = 60;
+        gameTimeLimit = 10;
     } else if (event.target.id === "levelTwo") {
         rowSize = SIZE_MEDIUM;
         colSize = SIZE_MEDIUM;
@@ -86,7 +97,8 @@ function sizeAndTimeSet(event) {
 
 //the size button hasbeen clicked and append the items
 function sizeCallBack(event) {
-    $(".remaining-time").text("0");
+    // $(".remaining-time").html("Timer:   " + gameTimeLimit);
+    $(".home-button").show();
     gameBoadPrep(event);
     playGameHandler(event);
     $(".personal-info").show();
@@ -145,7 +157,9 @@ function gameBoadPrep(event) {
                     console.log(matched.length);
                     console.log(chosenCards.length);
                     if (matched.length === totalLength) {
-                        victory();
+                        state["winning"] = true;
+                        console.log(state["winning"]);
+                        gameOver(timer);
                         console.log("you won");
                         $(".wining-statement").css("display", "inline");
                     }
@@ -203,20 +217,19 @@ function startCountDown() {
     //every one second 
     timer = setInterval(() => {
         gameTimeLimit--;
+        console.log(gameTimeLimit);
         $(".remaining-time").html("Timer:   " + gameTimeLimit);
         if(gameTimeLimit === 0) {
+            state["gameOnGoing"] = false;
             gameOver(timer);
         }
     }, 1000);
 }
 
-function victory() {
-    console.log("you won");
-}
-
 function restart() {
     hideInfo();
-    gameOnGoing = true;
+    state["gameOnGoing"] = true;
+    $(".statement").hide();
     handleStartClick();
     $(".restart-btn").hide();
 }
@@ -233,17 +246,18 @@ function hideInfo() {
 
 function gameOver(timer) {
     // TODO: Fix the game ending state. Handle winning condition.
-    gameOnGoing = false;
+    // gameOnGoing = false;
     clearInterval(timer);
     hideInfo(timer);
-    $(".lost-statement").show();
+    if (state["winning"]) {
+        $(".wining-statement").show();
+    } else {
+        $(".lost-statement").show();
+    }
     $(".score").hide();
     console.log("over");
 }
 
-// function winningComment() {
-
-// }
 
 
 

@@ -18,18 +18,25 @@
     border-width: 5px;
 }
 
+.home-button {
+    display: none;
+}
 /* button source:https://www.designskilz.com/cool-css-buttons/ */
 button{
     background:black;
     color:#fff;
+    /* margin-bottom: 10px; */
     border:none;
     position:relative;
     height:60px;
     font-size:1.6em;
     padding:0 2em;
     cursor:pointer;
+    margin-bottom: 40px;
     transition:800ms ease all;
     outline:none;
+    margin-right: 10px;
+    margin-top: 60px;
   }
   button:hover{
     background:#fff;
@@ -44,6 +51,9 @@ button{
     width:0;
     background:black;
     transition:400ms ease all;
+  }
+  .start-btn:before, button:after {
+    background:black;
   }
   button:after{
     right:inherit;
@@ -120,21 +130,20 @@ img {
 
 .start-btn {
     margin-top: 20%;
-    margin-bottom: 0;
     padding: 5px;
+    background:black;
+    color:white;
 }
 
 
-.lost-statement {
+.statement {
     border-style: solid;
     border-width: 3px;
     display: none;
     text-align: center;
-    margin-top: 40%;
-    margin-bottom: 20%;
-    padding: 20%;
+    padding: 50px;
     vertical-align: middle;
-    font-size: 4rem;;
+    font-size: 4rem;
     
 }
 .hidden {
