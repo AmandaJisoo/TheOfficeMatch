@@ -83,13 +83,22 @@ p {
 }
 
 img {
-    width: 150;
+    width: 150px;
     height:150px;
     margin: 10px;
     border-radius:15%;
     border-style:solid;
     border-color:white;
 }
+
+/* .gif {
+    width: 150;
+    height:150px;
+    margin: 10px;
+    border-radius:15%;
+    border-style:solid;
+    border-color:white;
+} */
 
 .remaining-time {
     display: none;
