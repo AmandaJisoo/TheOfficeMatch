@@ -72,6 +72,13 @@ button{
     transition:800ms ease all;
   }
   
+.general-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+}
 p {
     font-size: 1em;
     font-family: 'Dosis', sans-serif;
@@ -199,11 +206,11 @@ h1 {
     background-color: white;
     color: black;
     padding: 10px;
-    width: 100px;
+    width: 150px;
     height: 30px;
     text-align: center;
     border: 2px solid black;
     margin-inline-start: 20px;
     border-radius: 40px;
-    margin-top: 30px;
+    font-size: 1.5em;
 }

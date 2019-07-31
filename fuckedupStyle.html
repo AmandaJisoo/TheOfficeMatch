@@ -10,7 +10,7 @@
 </head>
   <body class="center">
     <div class="game-container">
-      <h1>The Office Match</h1>
+      <h1 class="general-info">The Office Match</h1>
       <div class="size-buttons">
         <button class="size" id ="levelOne">Lv 1</button>
         <button class="size" id ="levelTwo">Lv 2</button>
@@ -28,10 +28,12 @@
         </p>
         </div>
       <!-- initally the game board is empty -->
-        <div class= "score personal-info">Score: 0</div>
-        <div class="game-board personal-info"></div>
-        <div class="lost-statement statement">You Lost...</div>
-        <div class="wining-statement statement">You Won!</div>
+        <div class="general-info">
+          <div class= "score personal-info">Score: 0</div>
+          <div class="game-board personal-info"></div>
+          <div class="lost-statement statement">You Lost...</div>
+          <div class="wining-statement statement">You Won!</div>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

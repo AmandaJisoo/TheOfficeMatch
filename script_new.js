@@ -177,6 +177,7 @@ function isMatchId() {// index[0] == index[1]
 
 //noe display the finalized board
 function playGameHandler(event) {
+    // $(".score").
     $(".score").show();
     startCountDown();
     $(".game-board").show(); 
@@ -184,7 +185,8 @@ function playGameHandler(event) {
 
 function startCountDown() {
     $(".remaining-time").show();
-    $(".remaining-time").text(gameTimeLimit);
+    $(".remaining-time").text("Timer:    " + gameTimeLimit);
+    // $(".remaining-time").html("Timer:   " + gameTimeLimit);
     timerId = setInterval(() => {
         gameTimeLimit--;
         $(".remaining-time").html("Timer:   " + gameTimeLimit);
@@ -225,8 +227,6 @@ function gameOver(timer) {
     }
     $(".score").hide();
 }
-
-
 
 
 
