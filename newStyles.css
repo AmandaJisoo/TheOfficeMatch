@@ -1,3 +1,7 @@
+* {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: 'Hind Siliguri', sans-serif;
+}
 .game-board {
     margin:20px auto;
     padding:20px;
@@ -9,9 +13,8 @@
 }
 h1 {
     font-size: 2.5rem; 
-    font-family: 'Yanone Kaffeesatz', sans-serif;
-    font-family: 'Hind Siliguri', sans-serif;
 }
+
 .introduction {
     display: flex;
     margin-top: 20px;
@@ -21,6 +24,7 @@ h1 {
     align-items: center;
     justify-content: center;
     border-width: 5px;
+    padding: 2.5vw;
 }
 
 .home-button {
@@ -28,15 +32,13 @@ h1 {
 }
 /* button source:https://www.designskilz.com/cool-css-buttons/ */
 button{
-    /* margin-inline-start: 0px; */
     background:black;
     color:#fff;
-    /* margin-bottom: 10px; */
     border:none;
     position:relative;
     height:60px;
     font-size:1.6em;
-    padding:0 2em;
+    padding:0 1em;
     cursor:pointer;
     margin-bottom: 40px;
     transition:800ms ease all;
@@ -81,10 +83,9 @@ button{
 }
 p {
     font-size: 1em;
-    font-family: 'Dosis', sans-serif;
-    font-family: 'Indie Flower', cursive;
-    font-family: 'Lobster', cursive;
-    padding: 10px;
+    /* font-family: 'Dosis', sans-serif; */
+    /* font-family: 'Indie Flower', cursive;
+    font-family: 'Lobster', cursive; */
     word-break: break-word;
     text-align: center;
 }
@@ -98,14 +99,31 @@ img {
     border-color:white;
 }
 
-/* .gif {
-    width: 150;
-    height:150px;
-    margin: 10px;
-    border-radius:15%;
-    border-style:solid;
-    border-color:white;
-} */
+.personal-webpage {
+    color:white !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background:black;
+    padding: 11px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+}
+
+.personal-webpage:hover {
+    text-shadow: 0px 0px 6px rgba(224, 212, 212);
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.4s ease 0s;
+}
+
+.general-info {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
 
 .remaining-time {
     display: none;
@@ -142,18 +160,14 @@ img {
     border-color:blue;
 }
 
+
 .size {
     text-align: center;
-    padding:5px;
+    /* padding:5px; */
     margin: 5px;
     padding: 20px;
-}
-
-.start-btn {
-    margin-top: 20%;
-    padding: 5px;
-    background:black;
-    color:white;
+    padding-bottom: 50px;
+    width: 10vw;
 }
 
 
@@ -182,6 +196,7 @@ img {
 }
 .control-btns {
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -214,3 +229,21 @@ h1 {
     border-radius: 40px;
     font-size: 1.5em;
 }
+
+@media (max-width: 600px) {
+    img {
+        width: 26vw;
+        height:26vw;
+        margin: 10px;
+        border-radius:15%;
+        border-style:solid;
+        border-color:white;
+    }
+    .game-board {
+        grid-template-columns: repeat(2, auto) !important;
+    }
+
+    .size {
+        width: 21vw;
+    }
+  }

@@ -186,7 +186,6 @@ function playGameHandler(event) {
 function startCountDown() {
     $(".remaining-time").show();
     $(".remaining-time").text("Timer:    " + gameTimeLimit);
-    // $(".remaining-time").html("Timer:   " + gameTimeLimit);
     timerId = setInterval(() => {
         gameTimeLimit--;
         $(".remaining-time").html("Timer:   " + gameTimeLimit);
